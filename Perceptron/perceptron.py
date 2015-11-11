@@ -47,7 +47,7 @@ class Perceptron:
 
 			if error_count == 0:
 				# Convergence; can no longer be optimized.
-				print('Perceptron converged! ({0} iterations)'.format(iterations))
+				print('Perceptron converged! ({0} iterations)'.format(iteration))
 
 				return
 
@@ -61,7 +61,8 @@ class Perceptron:
 			return self.get_label(0)
 
 	def get_signal(self, label):
-		return self.labels.index(label)
+		# Finds the index of label in self.labels.
+		return np.where(self.labels == label)[0][0]
 
 	def get_label(self, signal):
 		return self.labels[signal]
