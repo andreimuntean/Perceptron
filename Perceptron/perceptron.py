@@ -16,12 +16,13 @@ class Perceptron:
 		# Stores the labels.
 		self.labels = np.unique(labels)
 
-		# Initializes the weights.
-		self.weights = np.zeros(data.shape[1])
+		# The weights represent the orientation of a (feature vector size - 1)-dimensional hyperplane.
+		self.weights = np.ones(data.shape[1])
 
-		# Initializes the threshold.
-		self.threshold = 0
+		# The bias determines the offset of the hyperplane.
+		self.bias = 0
 
+		# The hyperplane will be adjusted so that it separates feature vectors into one of two classes.
 		for iteration in range(1, maximum_iterations):
 			error_count = 0;
 
@@ -36,11 +37,11 @@ class Perceptron:
 				error = self.get_signal(labels[index]) - self.get_signal(label)
 
 				if not error == 0:
-					# Updates the weights.
-					self.weights = self.weights + self.learning_rate * error * features
+					# Adjusts the weights.
+					self.weights += self.learning_rate * error * features
 
-					# Updates the threshold.
-					self.threshold = self.threshold + self.learning_rate * error * -1
+					# Adjusts the bias.
+					self.bias += self.learning_rate * error
 
 					# Increments the error counter.
 					error_count += 1
@@ -52,10 +53,10 @@ class Perceptron:
 				return
 
 	def predict(self, features):
-		# Calculates the value that will be compared with the threshold.
-		activator = np.sum(np.multiply(self.weights, features))
+		# Calculates a value which -- if sufficiently big -- fires the neuron.
+		activator = np.sum(np.multiply(self.weights, features)) + self.bias
 
-		if activator > self.threshold:
+		if activator > 0:
 			return self.get_label(1)
 		else:
 			return self.get_label(0)
@@ -66,3 +67,9 @@ class Perceptron:
 
 	def get_label(self, signal):
 		return self.labels[signal]
+
+	def get_hyperplane(self):
+		hyperplane = np.append(self.weights, self.bias)
+
+		# Returns the normalized hyperplane.
+		return hyperplane / hyperplane.max()

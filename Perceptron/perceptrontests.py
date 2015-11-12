@@ -59,7 +59,7 @@ def split_into_classes(data, labels):
 	return [first_class[:, 1:], second_class[:, 1:]]
 
 
-def plot_results(perceptron, data):
+def plot_2d_results(perceptron, data):
 	# Divides the data into classes
 	training_data_classes = split_into_classes(data['training_data'], data['training_labels'])
 	test_data_classes = split_into_classes(data['test_data'], data['test_labels'])
@@ -73,9 +73,8 @@ def plot_results(perceptron, data):
 
 	# Plots the perceptron's decision boundary.
 	range = np.arange(0, 101, 100)
-	weights = perceptron.weights
-	threshold = perceptron.threshold
-	plt.plot(range, (range * -weights[0] + threshold) / weights[1], 'k')
+	hyperplane = perceptron.get_hyperplane()
+	plt.plot(range, (range * -hyperplane[0] - hyperplane[2]) / hyperplane[1], 'k')
 	plt.show()
 
 
@@ -92,8 +91,8 @@ def run():
 
 	# Displays the results.
 	print('Accuracy: {0}/{1}.'.format(correct_prediction_count, predictions.shape[0]))
-	print('For {0}x + {1}y = {2}'.format(perceptron.weights[0], perceptron.weights[1], perceptron.threshold))
-	plot_results(perceptron, data)
+	print('Hyperplane: {0}'.format(perceptron.get_hyperplane()))
+	plot_2d_results(perceptron, data)
 
 
 if __name__ == '__main__':
