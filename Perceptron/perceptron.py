@@ -9,7 +9,7 @@ import numpy as np
 
 
 class Perceptron:
-	def __init__(self, learning_rate = 0.1):
+	def __init__(self, learning_rate = 1):
 		self.learning_rate = learning_rate
 
 	def train(self, data, labels, maximum_iterations = 50):
@@ -20,7 +20,7 @@ class Perceptron:
 		self.weights = np.zeros(data.shape[1])
 
 		# Initializes the threshold.
-		self.threshold = np.random.rand(1)
+		self.threshold = 0
 
 		for iteration in range(1, maximum_iterations):
 			error_count = 0;

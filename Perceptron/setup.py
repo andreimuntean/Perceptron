@@ -15,5 +15,5 @@ setup(
     author = 'Andrei Muntean',
     license = 'MIT',
     keywords = 'perceptron classify classifier binary machine learning ml predict',
-    install_requires = ['numpy']
+    install_requires = ['numpy', 'matplotlib']
 )
