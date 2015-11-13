@@ -67,9 +67,3 @@ class Perceptron:
 
 	def get_label(self, signal):
 		return self.labels[signal]
-
-	def get_hyperplane(self):
-		hyperplane = np.append(self.weights, self.bias)
-
-		# Returns the normalized hyperplane.
-		return hyperplane / hyperplane.max()

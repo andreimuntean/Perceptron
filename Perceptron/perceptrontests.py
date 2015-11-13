@@ -60,6 +60,8 @@ def split_into_classes(data, labels):
 
 
 def plot_2d_results(perceptron, data):
+	"""Only works if the feature vector is bidimensional."""
+
 	# Divides the data into classes
 	training_data_classes = split_into_classes(data['training_data'], data['training_labels'])
 	test_data_classes = split_into_classes(data['test_data'], data['test_labels'])
@@ -73,17 +75,18 @@ def plot_2d_results(perceptron, data):
 
 	# Plots the perceptron's decision boundary.
 	range = np.arange(0, 101, 100)
-	hyperplane = perceptron.get_hyperplane()
-	plt.plot(range, (range * -hyperplane[0] - hyperplane[2]) / hyperplane[1], 'k')
+	weights = perceptron.weights
+	bias = perceptron.bias
+	plt.plot(range, -(range * weights[0] + bias) / weights[1], 'k')
 	plt.show()
 
 
 def run():
-	perceptron = Perceptron()
+	perceptron = Perceptron(0.1)
 	data = get_data(1)
 
 	# Trains the perceptron.
-	perceptron.train(data['training_data'], data['training_labels'], 20000)
+	perceptron.train(data['training_data'], data['training_labels'], 100000)
 
 	# Tests the perceptron.
 	predictions = get_predictions(perceptron, data['test_data'])
@@ -91,7 +94,7 @@ def run():
 
 	# Displays the results.
 	print('Accuracy: {0}/{1}.'.format(correct_prediction_count, predictions.shape[0]))
-	print('Hyperplane: {0}'.format(perceptron.get_hyperplane()))
+	print('Hyperplane: {0}'.format(np.append(perceptron.weights, perceptron.bias)))
 	plot_2d_results(perceptron, data)
 
 
