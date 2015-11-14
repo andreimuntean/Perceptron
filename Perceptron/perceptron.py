@@ -23,7 +23,7 @@ class Perceptron:
 		self.bias = 0
 
 		# The hyperplane will be adjusted so that it separates feature vectors into one of two classes.
-		for iteration in range(1, maximum_iterations):
+		for iteration in range(0, maximum_iterations):
 			error_count = 0;
 
 			# Goes through every example.
@@ -48,7 +48,7 @@ class Perceptron:
 
 			if error_count == 0:
 				# Convergence; can no longer be optimized.
-				print('Perceptron converged! ({0} iterations)'.format(iteration))
+				print('Perceptron converged! ({0} iterations)'.format(iteration + 1))
 
 				return
 
