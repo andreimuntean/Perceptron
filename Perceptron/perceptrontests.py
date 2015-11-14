@@ -73,11 +73,14 @@ def plot_2d_results(perceptron, data):
 		test_data_classes[1][:, 0], test_data_classes[1][:, 1], 'r*',
 		markersize = 12)
 
-	# Plots the perceptron's decision boundary.
-	range = np.arange(0, 101, 100)
+	# Constructs a line that represents the decision boundary.
 	weights = perceptron.weights
 	bias = perceptron.bias
-	plt.plot(range, -(range * weights[0] + bias) / weights[1], 'k')
+	x_range = np.array([0, 100])
+	y_range = -(x_range * weights[0] + bias) / weights[1]
+
+	# Plots the decision boundary.
+	plt.plot(x_range, y_range, 'k')
 	plt.show()
 
 
