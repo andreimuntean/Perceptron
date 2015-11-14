@@ -62,7 +62,7 @@ def split_into_classes(data, labels):
 def plot_2d_results(perceptron, data):
 	"""Only works if the feature vector is bidimensional."""
 
-	# Divides the data into classes
+	# Divides the data into classes.
 	training_data_classes = split_into_classes(data['training_data'], data['training_labels'])
 	test_data_classes = split_into_classes(data['test_data'], data['test_labels'])
 
@@ -82,11 +82,11 @@ def plot_2d_results(perceptron, data):
 
 
 def run():
-	perceptron = Perceptron(0.1)
-	data = get_data(1)
+	perceptron = Perceptron()
+	data = get_data(2)
 
 	# Trains the perceptron.
-	perceptron.train(data['training_data'], data['training_labels'], 100000)
+	perceptron.train(data['training_data'], data['training_labels'])
 
 	# Tests the perceptron.
 	predictions = get_predictions(perceptron, data['test_data'])
