@@ -12,12 +12,12 @@ class Perceptron:
 	def __init__(self, learning_rate = 1):
 		self.learning_rate = learning_rate
 
-	def train(self, data, labels, maximum_iterations = 200000):
+	def train(self, data, labels, maximum_iterations = 100000):
 		# Stores the labels.
 		self.labels = np.unique(labels)
 
 		# The weights represent the orientation of a (feature vector size - 1)-dimensional hyperplane.
-		self.weights = np.zeros(data.shape[1])
+		self.weights = np.random.randn(data.shape[1])
 
 		# The bias determines the offset of the hyperplane.
 		self.bias = 0
